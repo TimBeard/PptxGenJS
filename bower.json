@@ -8,7 +8,8 @@
     "jszip": "^3.10.1"
   },
   "authors": [
-    "Brent Ely <https://github.com/gitbrent>"
+    "Brent Ely <https://github.com/gitbrent>",
+    "Tim Beard <https://github.com/TimBeard>"
   ],
   "license": "MIT",
   "keywords": [

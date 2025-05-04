@@ -1,4 +1,4 @@
-// Type definitions for pptxgenjs 3.12.0
+// Type definitions for pptxgenjs 4.0.0
 // Project: https://gitbrent.github.io/PptxGenJS/
 // Definitions by: Brent Ely <https://github.com/gitbrent/>
 //                 Michael Beaumont <https://github.com/michaelbeaumont>
@@ -6,6 +6,7 @@
 //                 David Adams <https://github.com/iota-pi>
 //                 Stephen Cronin <https://github.com/cronin4392>
 // TypeScript Version: 3.x
+import { IOptsChartData } from '../src/core-interfaces.ts'
 
 export as namespace PptxGenJS
 
@@ -137,10 +138,10 @@ declare class PptxGenJS {
 	defineSlideMaster(props: PptxGenJS.SlideMasterProps): void
 	/**
 	 * Reproduces an HTML table as a PowerPoint table - including column widths, style, etc. - creates 1 or more slides as needed
-	 * @param {string} eleId table HTML element ID
+	 * @param {HTMLTableElement} table table HTML element ID
 	 * @param {TableToSlidesProps} props generation options
 	 */
-	tableToSlides(eleId: string, props?: PptxGenJS.TableToSlidesProps): void
+	tableToSlides(table: HTMLTableElement, props?: PptxGenJS.TableToSlidesProps): void
 }
 
 declare namespace PptxGenJS {
@@ -517,10 +518,10 @@ declare namespace PptxGenJS {
 		LINE_CALLOUT_3_ACCENT_BAR = 'accentCallout3',
 		LINE_CALLOUT_3_BORDER_AND_ACCENT_BAR = 'accentBorderCallout3',
 		LINE_CALLOUT_3_NO_BORDER = 'callout3',
-		LINE_CALLOUT_4 = 'borderCallout3',
-		LINE_CALLOUT_4_ACCENT_BAR = 'accentCallout3',
-		LINE_CALLOUT_4_BORDER_AND_ACCENT_BAR = 'accentBorderCallout3',
-		LINE_CALLOUT_4_NO_BORDER = 'callout3',
+		LINE_CALLOUT_4 = 'borderCallout4',
+		LINE_CALLOUT_4_ACCENT_BAR = 'accentCallout4',
+		LINE_CALLOUT_4_BORDER_AND_ACCENT_BAR = 'accentBorderCallout4',
+		LINE_CALLOUT_4_NO_BORDER = 'callout4',
 		LINE = 'line',
 		LINE_INVERSE = 'lineInv',
 		MATH_DIVIDE = 'mathDivide',
@@ -553,7 +554,6 @@ declare namespace PptxGenJS {
 		RIGHT_BRACKET = 'rightBracket',
 		RIGHT_TRIANGLE = 'rtTriangle',
 		ROUNDED_RECTANGLE = 'roundRect',
-		ROUNDED_RECTANGULAR_CALLOUT = 'wedgeRoundRectCallout',
 		ROUND_1_RECTANGLE = 'round1Rect',
 		ROUND_2_DIAG_RECTANGLE = 'round2DiagRect',
 		ROUND_2_SAME_RECTANGLE = 'round2SameRect',
@@ -2527,13 +2527,13 @@ declare namespace PptxGenJS {
 		rowH?: number | number[] // table
 	}
 	export interface PresSlide {
-		addChart: Function
-		addImage: Function
-		addMedia: Function
-		addNotes: Function
-		addShape: Function
-		addTable: Function
-		addText: Function
+		addChart(type: CHART_NAME | IChartMulti[], data: IOptsChartData[], options?: IChartOpts): PresSlide
+		addImage(options: ImageProps): PresSlide
+		addMedia(options: MediaProps): PresSlide
+		addNotes(notes: string): PresSlide
+		addShape(shapeName: SHAPE_NAME, options?: ShapeProps): PresSlide
+		addTable(tableRows: TableRow[], options?: TableProps): PresSlide
+		addText(text: string | TextProps[], options?: TextPropsOptions): PresSlide
 
 		/**
 		 * Background color or image (`color` | `path` | `data`)
